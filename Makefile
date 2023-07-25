@@ -1,5 +1,5 @@
 DOCKER ?= docker
-DOCKER_IMAGE ?= Douam/echoip_douam
+DOCKER_IMAGE ?= douam/echoip_douam
 OS := $(shell uname)
 ifeq ($(OS),Linux)
 	TAR_OPTS := --wildcards
@@ -71,7 +71,7 @@ ifndef DEST_PATH
 	$(error DEST_PATH must be set when publishing)
 endif
 	rsync -a $(GOPATH)/bin/$(XBIN) $(DEST_PATH)/$(XBIN)
-	@sha256sum $(GOPATH)/bin/$(XBIN)
+	@sha256sum $(GOPATH)/bin/$(XBIN) > $(DEST_PATH)/$(XBIN)/checksums.txt
 
 run:
 	go run cmd/echoip/main.go -a data/asn.mmdb -c data/city.mmdb -f data/country.mmdb -H x-forwarded-for -r -s -p
