@@ -1,5 +1,5 @@
 DOCKER ?= docker
-DOCKER_IMAGE ?= mpolden/echoip_douam
+DOCKER_IMAGE ?= Douam/echoip_douam
 OS := $(shell uname)
 ifeq ($(OS),Linux)
 	TAR_OPTS := --wildcards

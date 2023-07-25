@@ -1,6 +1,8 @@
-# Build
-FROM golang:1.15-buster AS build
-WORKDIR /go/src/github.com/mpolden/echoip_douam
+# Build with latest Go version
+FROM golang:latest AS build
+
+# 
+WORKDIR /go/src/github.com/Douam/echoip_douam
 COPY . .
 
 # Must build without cgo because libc is unavailable in runtime image
@@ -11,8 +13,9 @@ RUN make
 FROM scratch
 EXPOSE 8080
 
+#COPY --from=build /go/src/github.com/Douam/echoip_douam/html /opt/echoip_douam/html
 COPY --from=build /go/bin/echoip_douam /opt/echoip_douam/
-COPY html /opt/echoip_douam/html
+COPY --from=build /go/src/github.com/Douam/echoip_douam/html /opt/echoip_douam/html
 
 WORKDIR /opt/echoip_douam
-ENTRYPOINT ["/opt/echoip/echoip_douam"]
+ENTRYPOINT ["/opt/echoip_douam/echoip_douam"]

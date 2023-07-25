@@ -1,4 +1,4 @@
-module github.com/mpolden/echoip_douam
+module github.com/Douam/echoip_douam
 
 go 1.13
 
