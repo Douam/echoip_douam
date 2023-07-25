@@ -7,9 +7,9 @@ import (
 
 	"os"
 
-	"github.com/mpolden/echoip/http"
-	"github.com/mpolden/echoip/iputil"
-	"github.com/mpolden/echoip/iputil/geo"
+	"github.com/mpolden/echoip_douam/http"
+	"github.com/mpolden/echoip_douam/iputil"
+	"github.com/mpolden/echoip_douam/iputil/geo"
 )
 
 type multiValueFlag []string
@@ -38,7 +38,7 @@ func main() {
 	template := flag.String("t", "html", "Path to template dir")
 	cacheSize := flag.Int("C", 0, "Size of response cache. Set to 0 to disable")
 	profile := flag.Bool("P", false, "Enables profiling handlers")
-	sponsor := flag.Bool("s", false, "Show sponsor logo")
+	sponsor := flag.Bool("s", true, "Show sponsor logo")
 	var headers multiValueFlag
 	flag.Var(&headers, "H", "Header to trust for remote IP, if present (e.g. X-Real-IP)")
 	flag.Parse()
@@ -80,8 +80,10 @@ func main() {
 	if *profile {
 		log.Printf("Enabling profiling handlers")
 	}
+
 	log.Printf("Listening on http://%s", *listen)
 	if err := server.ListenAndServe(*listen); err != nil {
 		log.Fatal(err)
 	}
+
 }

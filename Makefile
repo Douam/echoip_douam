@@ -1,12 +1,12 @@
 DOCKER ?= docker
-DOCKER_IMAGE ?= mpolden/echoip
+DOCKER_IMAGE ?= mpolden/echoip_douam
 OS := $(shell uname)
 ifeq ($(OS),Linux)
 	TAR_OPTS := --wildcards
 endif
 XGOARCH := amd64
 XGOOS := linux
-XBIN := $(XGOOS)_$(XGOARCH)/echoip
+XBIN := $(XGOOS)_$(XGOARCH)/echoip_douam
 
 all: lint test install
 

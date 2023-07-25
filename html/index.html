@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>What is my IP address? &mdash; {{ .Host }}</title>
+    <title>Votre adresse IP? &mdash; {{ .Host }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -34,21 +34,29 @@
       <div class="pure-g gutters center">
         <div class="pure-u-1 pure-u-md-2-3">
           <div class="l-box">
-            <h1>{{ .Host }} — What is my IP address?</h1>
+            <h1>{{ .Host }} — Votre adresse IP?</h1>
             <p><code class="ip">{{ .IP }}</code></p>
             <p>
-              L'outil de résolution d'adresse ip interne d'ICOW basé sur le
+              L'Outil de résolution d'adresse ip interne d'ICOW basé sur le
               service ECHOIP.
             </p>
           </div>
         </div>
       </div>
-
+      <div class="pure-u pure-u-md-1">
+        <div class="leafcloud-logo">
+          <img id="logo" src="logo.jpg" style="position: fixed;
+          left: 86%;
+          top: 15px;">
+            
+          </img>
+        </div>
+      </div>
       <div class="pure-g gutters center">
         <!-- COLUMN 1 -->
         <div class="pure-u-1 pure-u-md-1-2 col">
           <div class="l-box">
-            <h2>What do we know about this IP address?</h2>
+            <h2>Informations complémentaires pour cette adresse IP?</h2>
             <table class="info-table">
               <tr>
                 <th scope="row">IP&nbsp;address</th>
@@ -145,13 +153,13 @@
               </tr>
               {{ end }} {{ end }}
             </table>
-            {{ if .Country }}
+            {{ if .IP }}
             <p>
-              This information is provided from the GeoLite2 database created by
-              MaxMind, available from
+              Informations provenant de GeoLite2. Base de données de MaxMind,
+              Disponible sur
               <a href="https://www.maxmind.com">www.maxmind.com</a>
             </p>
-            {{ end }} {{ if .Latitude }}
+            {{ end }} {{ if .UserAgent }}
             <div class="pure-u-1 pure-u-md-1-1">
               <h2>Map</h2>
               <iframe
@@ -170,10 +178,10 @@
         <!-- COLUMN 2 -->
         <div class="pure-u-1 pure-u-md-1-2">
           <div class="l-box">
-            <h2>How do I get this programmatically?</h2>
+            <h2>Afficher une Information?</h2>
             <p>
-              With the widget below you can build your query, and see what the
-              result will look like.
+              Vous pouvez à partir des bouttons ci dessous obtenir une
+              information précise concernant l'adresse IP recherchée.
             </p>
             <div class="pure-form">
               <!-- COMMAND WIDGET -->
@@ -246,12 +254,12 @@
               <form class="pure-form input-buttons">
                 <fieldset>
                   <label for="ipInput">
-                    Check another IP (optional)
+                    Vérifier une autre adresse IP (optionnelle)
                     <input
                       id="ipInput"
                       class=""
                       type="text"
-                      placeholder="IP to query"
+                      placeholder="IP à chercher"
                       onkeyup="updateIP(this.value)"
                     />
                   </label>
@@ -260,7 +268,7 @@
                     class="pure-button"
                     onclick="navigate()"
                   >
-                    Open
+                    Ouvrir
                   </button>
                 </fieldset>
               </form>
