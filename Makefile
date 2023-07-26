@@ -1,5 +1,7 @@
 DOCKER ?= docker
 DOCKER_IMAGE ?= douam/echoip_douam
+DOCKER_USERNAME = douam
+DOCKER_PASSWORD = B@chelor2023
 OS := $(shell uname)
 ifeq ($(OS),Linux)
 	TAR_OPTS := --wildcards
@@ -46,7 +48,8 @@ docker-multiarch-builder:
 	$(DOCKER) buildx create --name multiarch-builder --node multiarch-builder --driver docker-container --use
 	$(DOCKER) run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
-docker-build:
+docker-build: xinstall
+	CGO_ENABLED=0 GOOS=linux go build -o $(XBIN) ./cmd/echoip_douam
 	$(DOCKER) build -t $(DOCKER_IMAGE) .
 
 docker-login:
