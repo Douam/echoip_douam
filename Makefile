@@ -1,7 +1,6 @@
 DOCKER ?= docker
 DOCKER_IMAGE ?= douam/echoip_douam
-DOCKER_USERNAME = douam
-DOCKER_PASSWORD = B@chelor2023
+
 OS := $(shell uname)
 ifeq ($(OS),Linux)
 	TAR_OPTS := --wildcards
