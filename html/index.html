@@ -153,13 +153,13 @@
               </tr>
               {{ end }} {{ end }}
             </table>
-            {{ if .Country }}
+            {{ if .IP }}
             <p>
               Informations provenant de GeoLite2. Base de données de MaxMind,
               Disponible sur
               <a href="https://www.maxmind.com">www.maxmind.com</a>
             </p>
-            {{ end }} {{ if .Latitude }}
+            {{ end }} {{ if .UserAgent }}
             <div class="pure-u-1 pure-u-md-1-1">
               <h2>Map</h2>
               <iframe
