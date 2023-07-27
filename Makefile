@@ -1,5 +1,6 @@
 DOCKER ?= docker
 DOCKER_IMAGE ?= douam/echoip_douam
+GEOIP_LICENSE_KEY = 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
 
 OS := $(shell uname)
 ifeq ($(OS),Linux)
@@ -8,6 +9,8 @@ endif
 XGOARCH := amd64
 XGOOS := linux
 XBIN := $(XGOOS)_$(XGOARCH)/echoip_douam
+
+DATA_DIR := data
 
 all: lint test install
 
@@ -31,11 +34,12 @@ $(databases):
 ifndef GEOIP_LICENSE_KEY
 	$(error GEOIP_LICENSE_KEY must be set. Please see https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/)
 endif
-	mkdir -p data
-	@curl -fsSL -m 30 "https://download.maxmind.com/app/geoip_download?edition_id=$@&license_key=$(GEOIP_LICENSE_KEY)&suffix=tar.gz" | tar $(TAR_OPTS) --strip-components=1 -C $(CURDIR)/data -xzf - '*.mmdb'
-	test ! -f data/GeoLite2-City.mmdb || mv data/GeoLite2-City.mmdb data/city.mmdb
-	test ! -f data/GeoLite2-Country.mmdb || mv data/GeoLite2-Country.mmdb data/country.mmdb
-	test ! -f data/GeoLite2-ASN.mmdb || mv data/GeoLite2-ASN.mmdb data/asn.mmdb
+	mkdir -p $(DATA_DIR)
+	@curl -fsSL -m 30 "https://download.maxmind.com/app/geoip_download?edition_id=$@&license_key=$(GEOIP_LICENSE_KEY)&suffix=tar.gz" | tar $(TAR_OPTS) --strip-components=1 -C $(DATA_DIR) -xzf - '*.mmdb'
+	test ! -f $(DATA_DIR)/GeoLite2-City.mmdb || mv $(DATA_DIR)/GeoLite2-City.mmdb $(DATA_DIR)/city.mmdb
+	test ! -f $(DATA_DIR)/GeoLite2-Country.mmdb || mv $(DATA_DIR)/GeoLite2-Country.mmdb $(DATA_DIR)/country.mmdb
+	test ! -f $(DATA_DIR)/GeoLite2-ASN.mmdb || mv $(DATA_DIR)/GeoLite2-ASN.mmdb $(DATA_DIR)/asn.mmdb
+
 
 geoip-download: $(databases)
 
