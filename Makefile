@@ -10,7 +10,7 @@ XGOARCH := amd64
 XGOOS := linux
 XBIN := $(XGOOS)_$(XGOARCH)/echoip_douam
 
-DATA_DIR := data
+DATA_DIR := data_db
 
 all: lint test install
 
@@ -80,4 +80,4 @@ endif
 	@sha256sum $(GOPATH)/bin/$(XBIN) > $(DEST_PATH)/$(XBIN)/checksums.txt
 
 run:
-	go run cmd/echoip/main.go -a data/asn.mmdb -c data/city.mmdb -f data/country.mmdb -H x-forwarded-for -r -s -p
+	go run cmd/echoip_douam/main.go -a data_db/asn.mmdb -c data_db/city.mmdb -f data_db/country.mmdb -H x-forwarded-for -r -s -p

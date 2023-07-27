@@ -24,14 +24,15 @@ func (f *multiValueFlag) Set(v string) error {
 }
 
 func init() {
-	log.SetPrefix("echoip: ")
+	log.SetPrefix("echoip_douam: ")
 	log.SetFlags(log.Lshortfile)
 }
 
 func main() {
-	countryFile := flag.String("f", "", "Path to GeoIP country database")
-	cityFile := flag.String("c", "", "Path to GeoIP city database")
-	asnFile := flag.String("a", "", "Path to GeoIP ASN database")
+	
+	countryFile := flag.String("f", "./data_db/country.mmdb", "Path to GeoIP country database")
+	cityFile := flag.String("c", "./data_db/city.mmdb", "Path to GeoIP city database")
+	asnFile := flag.String("a", "./data_db/asn.mmdb", "Path to GeoIP ASN database")
 	listen := flag.String("l", ":8080", "Listening address")
 	reverseLookup := flag.Bool("r", false, "Perform reverse hostname lookups")
 	portLookup := flag.Bool("p", false, "Enable port lookup")
