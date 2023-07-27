@@ -12,6 +12,9 @@ RUN make xinstall
 FROM scratch
 EXPOSE 8080
 
+# Copy the GeoIP database files from the host to the container
+COPY data_db /data_db
+
 COPY --from=build /go/src/github.com/Douam/echoip_douam/html /opt/echoip_douam/html
 COPY --from=build /go/bin/echoip_douam /opt/echoip_douam/
 
